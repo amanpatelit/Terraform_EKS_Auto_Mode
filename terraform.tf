@@ -1,6 +1,4 @@
-###############################################
-# Create S3 Bucket for Terraform State Storage
-###############################################
+
 
 resource "aws_s3_bucket" "terraform_state" {
   bucket        = "devterraforms3"
@@ -12,10 +10,6 @@ resource "aws_s3_bucket" "terraform_state" {
   }
 }
 
-###############################################
-# Enable Versioning on S3 Bucket
-###############################################
-
 resource "aws_s3_bucket_versioning" "versioning" {
   bucket = aws_s3_bucket.terraform_state.id
 
@@ -24,9 +18,6 @@ resource "aws_s3_bucket_versioning" "versioning" {
   }
 }
 
-###############################################
-# Create DynamoDB Table for Terraform State Locking
-###############################################
 
 resource "aws_dynamodb_table" "terraform_locks" {
   name         = "devterraform"
