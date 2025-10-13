@@ -1,5 +1,9 @@
+###############################################
+# Create S3 Bucket for Terraform State Storage
+###############################################
+
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "devterraforms3"
+  bucket        = "devterraforms3"
   force_destroy = true
 
   tags = {
@@ -8,6 +12,10 @@ resource "aws_s3_bucket" "terraform_state" {
   }
 }
 
+###############################################
+# Enable Versioning on S3 Bucket
+###############################################
+
 resource "aws_s3_bucket_versioning" "versioning" {
   bucket = aws_s3_bucket.terraform_state.id
 
@@ -15,6 +23,10 @@ resource "aws_s3_bucket_versioning" "versioning" {
     status = "Enabled"
   }
 }
+
+###############################################
+# Create DynamoDB Table for Terraform State Locking
+###############################################
 
 resource "aws_dynamodb_table" "terraform_locks" {
   name         = "devterraform"
@@ -32,13 +44,15 @@ resource "aws_dynamodb_table" "terraform_locks" {
   }
 }
 
-
-# backend.tf
-terraform {
-  backend "s3" {
-    bucket         = "devterraforms3"
-    key            = "aws/terraform/terraform.tfstate"
-    region         = "ap-south-1"
-    dynamodb_table = "devterraform"
-  }
-}
+###############################################
+# Backend Configuration
+###############################################
+#terraform {
+#backend "s3" {
+# bucket         = "devterraforms3"
+# key            = "aws/terraform/terraform.tfstate"
+# region         = "ap-south-1"
+# dynamodb_table = "devterraform"
+# encrypt        = true
+# }
+#}
