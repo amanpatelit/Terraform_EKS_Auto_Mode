@@ -1,5 +1,4 @@
 
-
 resource "aws_s3_bucket" "terraform_state" {
   bucket        = "devterraforms3"
   force_destroy = true
@@ -35,15 +34,14 @@ resource "aws_dynamodb_table" "terraform_locks" {
   }
 }
 
-###############################################
+
 # Backend Configuration
-###############################################
-#terraform {
-#backend "s3" {
-# bucket         = "devterraforms3"
-# key            = "aws/terraform/terraform.tfstate"
-# region         = "ap-south-1"
-# dynamodb_table = "devterraform"
-# encrypt        = true
-# }
-#}
+terraform {
+backend "s3" {
+ bucket         = "devterraforms3"
+ key            = "aws/terraform/terraform.tfstate"
+ region         = "ap-south-1"
+ dynamodb_table = "devterraform"
+ encrypt        = true
+ }
+}
