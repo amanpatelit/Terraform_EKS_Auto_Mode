@@ -43,7 +43,6 @@ module "eks" {
   enable_cluster_creator_admin_permissions = true
 
   # Enable Auto Mode features
-  enable_eks_auto_mode = true
 
   # Optional managed node group
   eks_managed_node_groups = {
