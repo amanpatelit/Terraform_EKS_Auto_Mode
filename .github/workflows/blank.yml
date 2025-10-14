@@ -28,6 +28,16 @@ jobs:
         with:
           terraform_version: 1.9.5
       
-      - name : Terraform Destroy
-        run : terraform destroy
+      - name : Terraform init
+        run : terraform init
+
+      - name : terraform plan
+        run : terraform plan
+      
+      - name: terraform fmt
+        run : terraform fmt
+
+      - name: terraform vaildate
+        run: terraform validate
+
 
