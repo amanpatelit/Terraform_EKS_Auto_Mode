@@ -1,27 +1,35 @@
 variable "region" {
-  type = string
-}
-
-variable "eks" {
+  description = "AWS region"
   type        = string
-  description = "stage"
+  default     = "ap-south-1"
 }
 
-variable "cidr" {
+variable "vpc_name" {
+  description = "Name of the VPC"
   type        = string
-  description = "stage"
 }
 
-variable "azs" {
-  type    = list(string)
-  default = ["ap-south-1a", "ap-south-1b"]
+variable "vpc_cidr" {
+  description = "VPC CIDR block"
+  type        = string
 }
 
-variable "private_subnets" {
+variable "availability_zones" {
+  description = "Availability zones"
   type        = list(string)
-  description = "private_subnet"
 }
 
 variable "public_subnets" {
-  type = list(string)
+  description = "Public subnet CIDRs"
+  type        = list(string)
+}
+
+variable "private_subnets" {
+  description = "Private subnet CIDRs"
+  type        = list(string)
+}
+
+variable "cluster_name" {
+  description = "EKS cluster name"
+  type        = string
 }
