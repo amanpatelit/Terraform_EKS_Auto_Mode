@@ -1,3 +1,4 @@
+region          = "ap-south-1"
 eks             = "1.33"
 cidr            = "10.0.0.0/16"
 azs             = ["ap-south-1a", "ap-south-1b"]

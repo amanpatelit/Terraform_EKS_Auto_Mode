@@ -1,3 +1,7 @@
+variable "region" {
+  type = string
+}
+
 variable "eks" {
   type        = string
   description = "stage"
