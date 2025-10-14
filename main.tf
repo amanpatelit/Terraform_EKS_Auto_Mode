@@ -25,7 +25,7 @@ module "vpc" {
 }
 
 
-# Create EKS Auto Mode cluster using AWS module
+# Create EKS 
 
 
 module "eks" {
