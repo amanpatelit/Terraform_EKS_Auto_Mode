@@ -1,23 +1,3 @@
-
-resource "aws_s3_bucket" "terraform_state" {
-  bucket        = "devterraforms3"
-  force_destroy = true
-
-  tags = {
-    Name        = "TerraformStateBucket"
-    Environment = "dev"
-  }
-}
-
-resource "aws_s3_bucket_versioning" "versioning" {
-  bucket = aws_s3_bucket.terraform_state.id
-
-  versioning_configuration {
-    status = "Enabled"
-  }
-}
-
-
 resource "aws_dynamodb_table" "terraform_locks" {
   name         = "devterraform"
   billing_mode = "PAY_PER_REQUEST"
@@ -38,7 +18,7 @@ resource "aws_dynamodb_table" "terraform_locks" {
 # Backend Configuration
 terraform {
 backend "s3" {
- bucket         = "devterraforms3"
+ bucket         = "letscodeanddeploy"
  key            = "aws/terraform/terraform.tfstate"
  region         = "ap-south-1"
  dynamodb_table = "devterraform"
