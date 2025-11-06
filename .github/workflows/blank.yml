@@ -41,5 +41,5 @@ jobs:
         run: terraform plan
 
       - name: Terraform apply
-        run: terraform apply
+        run: terraform apply  -y 
 
