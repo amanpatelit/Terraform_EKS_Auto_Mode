@@ -30,9 +30,6 @@ jobs:
       
       - name: Terraform Init
         run: terraform init
-
-      - name: Terraform Plan
-        run: terraform plan
       
       - name: Terraform Fmt
         run: terraform fmt
@@ -40,30 +37,6 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      # Send Email Notification
-      - name: Send email notification
-        if: always()  # ensures this runs even if Terraform fails
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "GitHub Action - Terraform Run Completed"
-          body: |
-            Hello Aman,
-            
-            The Terraform GitHub Action for your **Stage VPC & EKS Cluster** has finished running.
-            
-            Repository: ${{ github.repository }}
-            Branch: ${{ github.ref }}
-            Status: ${{ job.status }}
-
-            Triggered by: ${{ github.actor }}
-            Workflow URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-            Regards,
-            GitHub Actions
-          to: amanpatel@example.com
-          from: "GitHub Actions <${{ secrets.MAIL_USERNAME }}>"
+      - name: Terraform Plan
+        run: terraform plan
 
