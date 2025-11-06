@@ -40,5 +40,8 @@ jobs:
       - name: Terraform Plan
         run: terraform plan
 
+      - name: Clean
+        run: rm -rf *
+
     
 
