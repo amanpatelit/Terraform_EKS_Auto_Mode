@@ -1,22 +1,15 @@
-name: Create or Destroy VPC & EKS Cluster for Stage
+name: Destroy VPC & EKS Cluster for Stage
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
-      action:
-        description: "Choose Terraform action"
+      confirm_destroy:
+        description: "Type YES to confirm Terraform destroy"
         required: true
-        default: "apply"
-        type: choice
-        options:
-          - apply
-          - destroy
+        default: "NO"
 
 jobs:
-  deploy:
+  destroy:
     runs-on: ubuntu-latest
 
     env:
@@ -41,16 +34,11 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Validate
-        run: terraform validate
-
-      - name: Terraform Plan
-        run: terraform plan -out=tfplan
-
-      - name: Terraform Apply or Destroy
+      - name: Confirm and Destroy
         run: |
-          if [ "${{ github.event.inputs.action }}" == "destroy" ]; then
-            terraform destroy -auto-approve
-          else
-            terraform apply -auto-approve tfplan
+          if [ "${{ github.event.inputs.confirm_destroy }}" != "YES" ]; then
+            echo " Destroy aborted. You must type YES to confirm."
+            exit 1
           fi
+          echo "Confirmation received. Destroying infrastructure..."
+          terraform destroy -auto-approve
