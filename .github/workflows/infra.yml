@@ -28,20 +28,9 @@ jobs:
         with:
           terraform_version: 1.9.5
       
-      - name: Terraform Init
-        run: terraform init
+      - name: Terraform destory
+        run: terraform destory -auto-approve
       
-      - name: Terraform Fmt
-        run: terraform fmt
-
-      - name: Terraform Validate
-        run: terraform validate
-
-      - name: Terraform Plan
-        run: terraform plan
-      
-      - name : Terraform Apply
-        run : terraform apply -auto-approve
 
     
 
